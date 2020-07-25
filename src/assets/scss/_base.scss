@@ -1,0 +1,26 @@
+// $primary-color: #1a6e9c;
+// $primary-color-light: #69aed4;
+// $primary-color-dark: #005e91;
+
+// $secondary-color: #33cccc;
+// $secondary-color-light: #d9f8f3;
+
+// $tertiary-color: #3c38c9;
+// $tertiary-color-light: #340df8;
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  min-height: 100vh;
+}
