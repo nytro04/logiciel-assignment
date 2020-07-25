@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import FormTable from "../components/form/FormTable";
+import ParentForm from "../components/forms/ParentForm";
 
 class Homepage extends Component {
   render() {
     return (
-      <div>
-        <FormTable />
-        <div>show this blood</div>
-      </div>
+      <React.Fragment>
+        <ParentForm />
+      </React.Fragment>
     );
   }
 }
