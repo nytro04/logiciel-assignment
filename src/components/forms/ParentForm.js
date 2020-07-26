@@ -7,15 +7,16 @@ import FormSuccessFail from "./FormSuccessFail";
 import { Form } from "react-bootstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { set } from "object-path";
 
 class ParentForm extends Component {
-  //   checkValidation = (errors, touched) => {
-  //     if (!!errors) {
-  //       return <Form.Control.Feedback>{errors}</Form.Control.Feedback>;
-  //     } else if (touched && !errors) {
-  //       return <Form.Control.Feedback>Looks great </Form.Control.Feedback>;
-  //     }
-  //   };
+  // handleError = (errors, touched) => {
+  //   if (!!errors) {
+  //     return <Form.Control.Feedback>{errors}</Form.Control.Feedback>;
+  //   } else if (touched && !errors) {
+  //     return <Form.Control.Feedback>Looks great </Form.Control.Feedback>;
+  //   }
+  // };
 
   state = {
     step: 1,
@@ -166,7 +167,8 @@ class ParentForm extends Component {
       officerPostion,
       officerRecommendation,
     } = this.state;
-    const values = {
+
+    const formValues = {
       name,
       gender,
       contact,
@@ -202,51 +204,80 @@ class ParentForm extends Component {
 
     let stepCurrentForm;
 
-    if (step === 1) {
-      stepCurrentForm = (
-        <PersonalInfoForm
-          nextStep={this.nextStep}
-          handleChange={this.handleChange}
-          values={values}
-        />
-      );
-    } else if (step === 2) {
-      stepCurrentForm = (
-        <BusinessInfoForm
-          nextStep={this.nextStep}
-          prevStep={this.prevStep}
-          handleChange={this.handleChange}
-          values={values}
-        />
-      );
-    } else if (step === 3) {
-      stepCurrentForm = (
-        <TrainingInfoForms
-          nextStep={this.nextStep}
-          prevStep={this.prevStep}
-          handleChange={this.handleChange}
-          values={values}
-        />
-      );
-    } else if (step === 4) {
-      stepCurrentForm = (
-        <PreviewDetails
-          nextStep={this.nextStep}
-          prevStep={this.prevStep}
-          handleChange={this.handleChange}
-          values={values}
-        />
-      );
-    } else if (step === 5) {
-      stepCurrentForm = <FormSuccessFail />;
-    } else {
-      stepCurrentForm = <h5>Loading...</h5>;
-    }
+    // if (step === 1) {
+    //   stepCurrentForm = (
+    //     <PersonalInfoForm
+    //       nextStep={this.nextStep}
+    //       handleChange={this.handleChange}
+    //       values={formValues}
+    //     />
+    //   );
+    // } else if (step === 2) {
+    //   stepCurrentForm = (
+    //     <BusinessInfoForm
+    //       nextStep={this.nextStep}
+    //       prevStep={this.prevStep}
+    //       handleChange={this.handleChange}
+    //       values={formValues}
+    //     />
+    //   );
+    // } else if (step === 3) {
+    //   stepCurrentForm = (
+    //     <TrainingInfoForms
+    //       nextStep={this.nextStep}
+    //       prevStep={this.prevStep}
+    //       handleChange={this.handleChange}
+    //       values={formValues}
+    //     />
+    //   );
+    // } else if (step === 4) {
+    //   stepCurrentForm = (
+    //     <PreviewDetails
+    //       nextStep={this.nextStep}
+    //       prevStep={this.prevStep}
+    //       handleChange={this.handleChange}
+    //       values={formValues}
+    //     />
+    //   );
+    // } else if (step === 5) {
+    //   stepCurrentForm = <FormSuccessFail />;
+    // } else {
+    //   stepCurrentForm = <h5>Loading...</h5>;
+    // }
 
     return (
       <div className="container justify-content-center">
-        <Formik initialValues={}></Formik>
-        <form className="card p-3 bg-light">{stepCurrentForm}</form>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={(values, { setSubmitting, resetForm }) => {
+            // disable submit button when submitting
+            setSubmitting(true);
+
+            // Submit to backend here
+          }}
+        >
+          {({
+            handleSubmit,
+            handleChange,
+            handleBlur,
+            values,
+            touched,
+            errors,
+          }) => (
+            <Form noValidate onSubmit={handleSubmit}>
+              <PersonalInfoForm
+                nextStep={this.nextStep}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                values={values}
+                errors={errors}
+                touched={touched}
+              />
+              {/* <div>{stepCurrentForm}</div> */}
+            </Form>
+          )}
+        </Formik>
       </div>
     );
   }

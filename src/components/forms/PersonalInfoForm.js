@@ -1,76 +1,76 @@
 import React from "react";
 
-const PersonalInfoForm = () => {
+import TextInput from "./TextInput";
+
+const PersonalInfoForm = ({
+  values,
+  handleChange,
+  handleBlur,
+  touched,
+  errors,
+  handleError,
+}) => {
   return (
     <div>
       <h1>Personal Information</h1>
-      <div class="form-group row ">
-        <label for="inputEmail3" class="col-sm-4 col-form-label">
-          Name of the Skilled Craft Person
-        </label>
-        <div class="col-sm-6">
-          <input type="email" class="form-control" id="inputEmail3" />
-        </div>
-      </div>
 
-      <fieldset class="form-group">
-        <div class="row">
-          <legend class="col-form-label col-sm-4 pt-0">Gender</legend>
-          <div class="col-sm-6">
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="gridRadios"
-                id="gridRadios1"
-                value="option1"
-                checked
-              />
-              <label class="form-check-label pr-5" for="gridRadios1">
-                Male
-              </label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="gridRadios"
-                id="gridRadios2"
-                value="option2"
-              />
-              <label class="form-check-label" for="gridRadios2">
-                Female
-              </label>
-            </div>
-          </div>
-        </div>
-      </fieldset>
+      <TextInput
+        type="text"
+        name="name"
+        placeholder="Name"
+        value={values.name}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        isValid={touched.name && !errors.name ? true : false}
+        isInvalid={!!errors.name ? true : false}
+        // renderErrorText={handleError(errors.name, touched.name)}
+      />
+      <TextInput
+        type="checkbox"
+        name="gender"
+        placeholder="Gender"
+        value={values.gender}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        isValid={touched.gender && !errors.gender ? true : false}
+        isInvalid={!!errors.gender ? true : false}
+        // renderErrorText={handleError(errors.gender, touched.gender)}
+      />
 
-      <div class="form-group row">
-        <label for="contact" class="col-sm-4 col-form-label">
-          Contact Number
-        </label>
-        <div class="col-sm-6">
-          <input type="email" class="form-control" id="contact" />
-        </div>
-      </div>
+      <TextInput
+        type="text"
+        name="contact"
+        placeholder="Contact"
+        value={values.contact}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        isValid={touched.contact && !errors.contact ? true : false}
+        isInvalid={!!errors.contact ? true : false}
+        // renderErrorText={handleError(errors.contact, touched.contact)}
+      />
 
-      <div class="form-group row">
-        <label for="email" class="col-sm-4 col-form-label">
-          Email Address
-        </label>
-        <div class="col-sm-6">
-          <input type="email" class="form-control" id="email" />
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="digitalAddress" class="col-sm-4 col-form-label">
-          Ghana Postal Digital Address
-        </label>
-        <div class="col-sm-6">
-          <input type="email" class="form-control" id="digitalAddress" />
-        </div>
-      </div>
+      <TextInput
+        type="email"
+        name="email"
+        placeholder="Email"
+        value={values.email}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        isValid={touched.email && !errors.email ? true : false}
+        isInvalid={!!errors.email ? true : false}
+        // renderErrorText={handleError(errors.email, touched.email)}
+      />
+      <TextInput
+        type="text"
+        name="ghPostNumber"
+        placeholder="Ghana Post Number"
+        value={values.ghPostNumber}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        isValid={touched.ghPostNumber && !errors.ghPostNumber ? true : false}
+        isInvalid={!!errors.ghPostNumber ? true : false}
+        // renderErrorText={handleError(errors.ghPostNumber, touched.ghPostNumber)}
+      />
 
       <div className="text-right">
         <button type="submit" className="btn btn-primary">
